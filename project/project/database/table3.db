@@ -1,0 +1,37 @@
+from tkinter import *
+import sqlite3
+root=Tk()
+root.title("login information")
+root.geometry("500x500+0+0")
+roleid=IntVar()
+rolename=StringVar()
+roledesc=StringVar()
+def database():
+    roleid1=roleid.get()
+    rolename1=rolename.get()
+    roledesc1=roledesc.get()
+    conn=sqlite3.connect('roles1.db')
+    c=conn.cursor()
+    c.execute("INSERT INTO roles1 (role_id,role_name,role_desc) VALUES(?,?,?)",(roleid1,rolename1,roledesc1))
+    conn.commit()
+    conn.close()
+la=Label(root,text='roles information',width=20,font=('Calibri',20,"bold"),bg="yellow",fg="red")
+la.place(x=90,y=53)
+la1=Label(root,text='RoleId',width=20,font=('Calibri',10,"bold"),bg="yellow",fg="red")
+la1.place(x=80,y=130)
+entry1=Entry(root,textvariable=roleid)
+entry1.place(x=240,y=130)
+la2=Label(root,text='RoleName',width=20,font=('Calibri',10,"bold"),bg="yellow",fg="red")
+la2.place(x=80,y=180)
+entry2=Entry(root,textvariable=rolename)
+entry2.place(x=240,y=180)
+la3=Label(root,text='RoleDesc',width=20,font=('Calibri',10,"bold"),bg="yellow",fg="red")
+la3.place(x=80,y=230)
+entry3=Entry(root,textvariable=roledesc)
+entry3.place(x=240,y=230)
+button=Button(root,text='Submit',width=20,bg='brown',fg='white',command=database)
+button.place(x=300,y=380)
+root.mainloop()
+
+
+
